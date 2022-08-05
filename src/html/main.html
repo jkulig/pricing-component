@@ -1,0 +1,63 @@
+<div class="container my-10 mx-auto" x-data="{ 
+    monthly: true,
+    plans: [
+        {
+            name: 'Basic',
+            position: 'left',
+            price: {
+                monthly: 19.99,
+                annual: 199.99
+            },
+            storage: '500 GB',
+            users: 2,
+            transfer: 3
+        },
+        {
+            name: 'Professional',
+            position: 'center',
+            price: {
+                monthly: 24.99,
+                annual: 249.99
+            },
+            storage: '1 TB',
+            users: 5,
+            transfer: 10
+        },
+        {
+            name: 'Master',
+            position: 'right',
+            price: {
+                monthly: 39.99,
+                annual: 399.99
+            },
+            storage: '2 TB',
+            users: 10,
+            transfer: 20
+        }
+    ]}">
+    <div class="flex items-center justify-center items-center mb-10">
+        <span class="text-small font-bold" :class="monthly ? 'text-light-gray' : 'text-storm-gray'">Annually</span>
+        <label for="subscription-toggle" class="mx-6 inline-flex relative items-center cursor-pointer">
+            <input type="checkbox" value="" id="subscription-toggle" class="sr-only peer" x-model="monthly">
+            <div class="w-14 h-8 bg-light-gray rounded-full bg-gradient-to-r from-lavender-light to-lavender-dark
+                        peer peer-checked:after:translate-x-full
+                        after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all"></div>
+        </label>
+        <span class="text-small font-bold" :class="monthly ? 'text-storm-gray' : 'text-light-gray'">Monthly</span>
+    </div>
+    <div class="flex flex-wrap justify-center items-center">
+        <template x-for="plan in plans" :key="plan.position">
+            <div class="p-8 max-w-full md:max-w-[33%] w-96 mx-8 md:mx-0 my-5 shadow-lg rounded-xl shadow-off-white flex flex-col items-center items-stretch"
+                :class="plan.position === 'center' ? 'bg-gradient-to-b from-lavender-light to-lavender-dark' : plan.position === 'left' ? 'bg-white md:rounded-r-none' : 'bg-white md:rounded-l-none' ">
+                <h3 class="font-bold text-center" :class="plan.position === 'center' ? 'text-white mt-5': 'text-storm-gray'" x-text="plan.name"></h3>
+                <div class="my-2 font-bold flex items-center text-center justify-center" :class="plan.position === 'center' ? 'text-white': 'text-dark-gray'"> <span class="text-lg">$</span><span class="text-xl" x-text="monthly ? plan.price.monthly : plan.price.annual"></span></div>
+                <ul class="mt-2 text-center text-xs" :class="plan.position === 'center' ? 'text-white': 'text-storm-gray'">
+                    <li class="py-4 border-t border-b border-space-gray" :class="plan.position === 'center' ? 'border-perano': 'border-space-gray'"><b x-text="plan.storage"></b> Storage</li>
+                    <li class="py-4 border-b" :class="plan.position === 'center' ? 'border-perano': 'border-space-gray'"><b x-text="plan.users"></b> Users Allowed</li>
+                    <li class="py-4 border-b mb-8" :class="plan.position === 'center' ? 'border-perano': 'border-space-gray'">Send up to <b x-text="plan.transfer"></b> GB</li>
+                </ul>
+                <button class="py-3 px-5 w-100 rounded text-xxs uppercase tracking-widest" :class="plan.position === 'center' ? 'bg-white hover:bg-transparent text-lavender-dark hover:text-white mb-5 hover:outline hover:outline-white': 'bg-gradient-to-r from-lavender-light to-lavender-light hover:from-white hover:to-white text-white hover:text-lavender-light hover:outline hover:outline-color-lavender-light'">Learn More</button>
+            </div>
+        </template>
+    </div>
+</div>
